@@ -137,7 +137,6 @@ def print_board(board):
         for row in range(N):
             if board[row][col] == 1:
                 screen.blit(image, (int(col * SQUARESIZE + SQUARESIZE / 4), int((row) * SQUARESIZE + SQUARESIZE / 4)))
-                # pygame.draw.circle(screen, BLACK, (int(col * SQUARESIZE + SQUARESIZE / 2), int((row - 1) * SQUARESIZE + SQUARESIZE + SQUARESIZE / 2)), RADIUS)
     pygame.display.update()
 
 
@@ -145,7 +144,6 @@ inputMode = True
 board = create_board()
 print(board)
 
-clock = pygame.time.Clock()
 pygame.init()
 screen_size = (5 * SQUARESIZE, 5 * SQUARESIZE)
 screen = pygame.display.set_mode(screen_size)
@@ -252,6 +250,3 @@ while(1):
                 if 175 < posx < 205 and 340 < posy < 365:
                     if START_COLUMN > 0:
                         START_COLUMN = START_COLUMN - 1
-
-    pygame.display.update()
-    clock.tick(1)
