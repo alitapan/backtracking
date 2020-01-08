@@ -126,12 +126,10 @@ def nqueen_run(board, col):
     for row in range(N):
         if is_safe(board, row, col):
             place_queen(board, row, col)
-            pygame.event.pump()
-            pygame.time.wait(100)
             print(board)
-            print_board(board)
+            # pygame.event.pump()
+            # print_board(board)
             pygame.display.update()
-
             if nqueen_run(board, col + 1):
                 return True
             board[row][col] = 0
@@ -145,8 +143,10 @@ def print_board(board):
     for col in range(N):
         for row in range(N):
             if board[row][col] == 1:
+                pygame.event.pump()
+                pygame.time.wait(500)
                 screen.blit(image, (int(col * SQUARESIZE + SQUARESIZE / 4), int((row) * SQUARESIZE + SQUARESIZE / 4)))
-                # pygame.time.wait(500)
+                pygame.display.update()
                 # pygame.draw.circle(screen, BLACK, (int(col * SQUARESIZE + SQUARESIZE / 2), int((row - 1) * SQUARESIZE + SQUARESIZE + SQUARESIZE / 2)), RADIUS)
     pygame.display.update()
 
