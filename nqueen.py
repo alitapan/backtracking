@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import numpy as np
 import pygame
 import sys
@@ -99,20 +100,6 @@ def input_screen(board):
     pygame.display.update()
 
 
-def attempt_to_place(board, row, col):
-    pygame.draw.circle(screen, LIGHT, (int(col * SQUARESIZE + SQUARESIZE / 2), int((row - 1) * SQUARESIZE + SQUARESIZE + SQUARESIZE / 2)), RADIUS)
-    pygame.display.update()
-    # pygame.time.wait(2000)
-
-
-def fail_to_place(board, row, col):
-    fail = pygame.draw.circle(screen, RED, (int(col * SQUARESIZE + SQUARESIZE / 2), int((row - 1) * SQUARESIZE + SQUARESIZE + SQUARESIZE / 2)), RADIUS)
-    pygame.display.update()
-    # pygame.time.wait(2000)
-    fail = pygame.draw.circle(screen, LIGHT, (int(col * SQUARESIZE + SQUARESIZE / 2), int((row - 1) * SQUARESIZE + SQUARESIZE + SQUARESIZE / 2)), RADIUS)
-    pygame.display.update()
-
-
 def place_queen(board, row, col):
     board[row][col] = 1
 
@@ -139,7 +126,12 @@ def nqueen_run(board, col):
     for row in range(N):
         if is_safe(board, row, col):
             place_queen(board, row, col)
+            pygame.event.pump()
+            pygame.time.wait(100)
             print(board)
+            print_board(board)
+            pygame.display.update()
+
             if nqueen_run(board, col + 1):
                 return True
             board[row][col] = 0
@@ -149,10 +141,12 @@ def nqueen_run(board, col):
 def print_board(board):
     image = pygame.image.load(r'resources/queen_symbol.png')
     image = pygame.transform.scale(image, (50, 50))
+
     for col in range(N):
         for row in range(N):
             if board[row][col] == 1:
                 screen.blit(image, (int(col * SQUARESIZE + SQUARESIZE / 4), int((row) * SQUARESIZE + SQUARESIZE / 4)))
+                # pygame.time.wait(500)
                 # pygame.draw.circle(screen, BLACK, (int(col * SQUARESIZE + SQUARESIZE / 2), int((row - 1) * SQUARESIZE + SQUARESIZE + SQUARESIZE / 2)), RADIUS)
     pygame.display.update()
 
@@ -160,14 +154,12 @@ def print_board(board):
 inputMode = True
 board = create_board()
 print(board)
-
 clock = pygame.time.Clock()
 pygame.init()
 screen_size = (5 * SQUARESIZE, 5 * SQUARESIZE)
 screen = pygame.display.set_mode(screen_size)
 draw_board(board)
 pygame.display.update()
-
 titleFont = pygame.font.SysFont("Century Gothic", 75)
 descriptionFont = pygame.font.SysFont("Century Gothic", 22)
 buttonFont = pygame.font.SysFont("Century Gothic", 35)
@@ -212,6 +204,7 @@ while(1):
             if inputMode == True:
                 # Build
                 if 85 < posx < 205 and 362 < posy < 400:
+
                     inputMode = False
                     board = create_board()
                     screen_size = (N * SQUARESIZE, N * SQUARESIZE)
