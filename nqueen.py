@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 import numpy as np
 import pygame
 import sys
@@ -147,7 +146,6 @@ def print_board(board):
                 pygame.time.wait(500)
                 screen.blit(image, (int(col * SQUARESIZE + SQUARESIZE / 4), int((row) * SQUARESIZE + SQUARESIZE / 4)))
                 pygame.display.update()
-                # pygame.draw.circle(screen, BLACK, (int(col * SQUARESIZE + SQUARESIZE / 2), int((row - 1) * SQUARESIZE + SQUARESIZE + SQUARESIZE / 2)), RADIUS)
     pygame.display.update()
 
 
