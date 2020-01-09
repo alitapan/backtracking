@@ -220,5 +220,5 @@ while(1):
                     N = N + 1
                 # Decrement N
                 if 210 < posx < 220 and 338 < posy < 348:
-                    if N > 3:
+                    if N > 4:
                         N = N - 1
