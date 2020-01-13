@@ -4,8 +4,24 @@ import sys
 import time
 import math
 
+
+
 # ------------------------------------------------------------------------ #
 N = 9
+
+grid = [[0 for x in range(N)]for y in range(N)]
+
+#Change to the board can be manually made from here
+grid=[[3,0,6,5,0,8,4,0,0],
+      [5,2,0,0,0,0,0,0,0],
+      [0,8,7,0,0,0,0,3,1],
+      [0,0,3,0,1,0,0,8,0],
+      [9,0,0,8,6,3,0,0,5],
+      [0,5,0,0,9,0,6,0,0],
+      [1,3,0,0,0,0,2,5,0],
+      [0,0,0,0,0,0,0,7,4],
+      [0,0,5,2,0,6,3,0,0]]
+
 # ------------------------------------------------------------------------ #
 
 # Global Variables
@@ -48,29 +64,29 @@ def input_screen(board):
 
 
     # Build Button:
-    pygame.draw.rect(screen, BORDER, (290, 3.62 * SQUARESIZE, 1.2 * SQUARESIZE, 0.4 * SQUARESIZE))
-    pygame.draw.rect(screen, WHITE, (290 + 1, 3.62 * SQUARESIZE + 1, 1.2 * SQUARESIZE - 2, 0.4 * SQUARESIZE - 2))
+    pygame.draw.rect(screen, BORDER, (290, 4.2 * SQUARESIZE, 1.2 * SQUARESIZE, 0.4 * SQUARESIZE))
+    pygame.draw.rect(screen, WHITE, (290 + 1, 4.2 * SQUARESIZE + 1, 1.2 * SQUARESIZE - 2, 0.4 * SQUARESIZE - 2))
 
     # Quit Button:
-    pygame.draw.rect(screen, BORDER, (490, 3.62 * SQUARESIZE, 1.2 * SQUARESIZE, 0.4 * SQUARESIZE))
-    pygame.draw.rect(screen, WHITE, (490, 3.62 * SQUARESIZE + 1, 1.2 * SQUARESIZE - 2, 0.4 * SQUARESIZE - 2))
+    pygame.draw.rect(screen, BORDER, (490, 4.2 * SQUARESIZE, 1.2 * SQUARESIZE, 0.4 * SQUARESIZE))
+    pygame.draw.rect(screen, WHITE, (490, 4.2 * SQUARESIZE + 1, 1.2 * SQUARESIZE - 2, 0.4 * SQUARESIZE - 2))
 
 
-    descriptionLabel1 = descriptionFont.render("", 1, WHITE)
-    descriptionLabel2 = descriptionFont.render("", 1, WHITE)
-    descriptionLabel3 = descriptionFont.render("", 1, WHITE)
+    descriptionLabel1 = descriptionFont.render("This program is a sudoku solver using", 1, WHITE)
+    descriptionLabel2 = descriptionFont.render("backtracking algorithm. You may change", 1, WHITE)
+    descriptionLabel3 = descriptionFont.render("the sudoku board from the source file.", 1, WHITE)
 
 
 
-    buttonLabel1 = buttonFont.render("BUILD", 1, BORDER)
+    buttonLabel1 = buttonFont.render("SOLVE", 1, BORDER)
     buttonLabel2 = buttonFont.render("QUIT", 1, BORDER)
 
     screen.blit(title_image, (190, 165))
-    screen.blit(descriptionLabel1, (75, 235))
-    screen.blit(descriptionLabel2, (75, 255))
-    screen.blit(descriptionLabel3, (75, 275))
-    screen.blit(buttonLabel1, (310, 371))
-    screen.blit(buttonLabel2, (515, 371))
+    screen.blit(descriptionLabel1, (300, 285))
+    screen.blit(descriptionLabel2, (300, 305))
+    screen.blit(descriptionLabel3, (300, 325))
+    screen.blit(buttonLabel1, (310, 429))
+    screen.blit(buttonLabel2, (515, 429))
 
     pygame.display.update()
 
@@ -116,8 +132,6 @@ def solve_sudoku(grid):
         if(is_safe(grid,row,col,num)):
             grid[row][col]= num
             print(grid)
-
-            #print_board(board)
             if(solve_sudoku(grid)):
                 return True
             grid[row][col] = 0
@@ -133,7 +147,6 @@ def print_board(board, grid):
                 screen.blit(gridLabel, (col * SQUARESIZE + SQUARESIZE/2 - 8, row * SQUARESIZE + SQUARESIZE/2 - 8))
                 pygame.display.update()
     pygame.display.update()
-
 
 
 inputMode = True
@@ -165,16 +178,16 @@ while(1):
             posy = event.pos[1]
             if inputMode == True:
                 # Build Button Hover
-                if 280 < posx < 420 and 362 < posy < 400:
-                    pygame.draw.rect(screen, DARK, (290 + 1, 3.62 * SQUARESIZE + 1, 1.2 * SQUARESIZE - 2, 0.4 * SQUARESIZE - 2))
+                if 280 < posx < 420 and 415 < posy < 460:
+                    pygame.draw.rect(screen, DARK, (290 + 1, 4.2 * SQUARESIZE + 1, 1.2 * SQUARESIZE - 2, 0.4 * SQUARESIZE - 2))
                     buttonLabel1 = buttonFont.render("BUILD", 1, BORDER)
-                    screen.blit(buttonLabel1, (310, 371))
+                    screen.blit(buttonLabel1, (310, 429))
                     pygame.display.update()
                 # Quit Button Hover
-                if 480 < posx < 620 and 362 < posy < 400:
-                    pygame.draw.rect(screen, DARK, (490, 3.62 * SQUARESIZE + 1, 1.2 * SQUARESIZE - 2, 0.4 * SQUARESIZE - 2))
+                if 480 < posx < 620 and 415 < posy < 460:
+                    pygame.draw.rect(screen, DARK, (490, 4.2 * SQUARESIZE + 1, 1.2 * SQUARESIZE - 2, 0.4 * SQUARESIZE - 2))
                     buttonLabel2 = buttonFont.render("QUIT", 1, BORDER)
-                    screen.blit(buttonLabel2, (515, 371))
+                    screen.blit(buttonLabel2, (515, 429))
                     pygame.display.update()
 
         if event.type == pygame.MOUSEBUTTONDOWN:
@@ -182,27 +195,18 @@ while(1):
             posy = event.pos[1]
             if inputMode == True:
                 # Build
-                if 280 < posx < 420 and 362 < posy < 400:
+                if 280 < posx < 420 and 415 < posy < 460:
                     inputMode = False
 
-                    grid = [[0 for x in range(N)]for y in range(N)]
-                    grid=[[3,0,6,5,0,8,4,0,0],
-                          [5,2,0,0,0,0,0,0,0],
-                          [0,8,7,0,0,0,0,3,1],
-                          [0,0,3,0,1,0,0,8,0],
-                          [9,0,0,8,6,3,0,0,5],
-                          [0,5,0,0,9,0,6,0,0],
-                          [1,3,0,0,0,0,2,5,0],
-                          [0,0,0,0,0,0,0,7,4],
-                          [0,0,5,2,0,6,3,0,0]]
                     draw_board(board)
                     print(grid)
                     pygame.display.update()
                     print_board(board, grid)
+
                     if(solve_sudoku(grid)):
                         print_board(board, grid)
                     else:
                         print("No solution")
                 # Quit
-                if 480 < posx < 620 and 362 < posy < 400:
+                if 480 < posx < 620 and 415 < posy < 460:
                     sys.exit()
