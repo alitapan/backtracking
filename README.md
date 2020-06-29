@@ -1,7 +1,7 @@
 # backtracking :arrows_counterclockwise:
-Demonstration of backtracking algorithms with some classical computer science problems!
+Backtracking algorithms with some classical computer science problems.
 
-Current problem set (more to come!):
+Current problem set:
 - N-Queens
 - Sudoku 
 
