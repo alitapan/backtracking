@@ -1,5 +1,5 @@
 # backtracking :arrows_counterclockwise:
-Backtracking algorithms with some classical computer science problems.
+Backtracking algorithm with some classical computer science problems.
 
 Current problem set:
 - N-Queens
