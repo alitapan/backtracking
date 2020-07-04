@@ -1,4 +1,4 @@
-# backtracking :arrows_counterclockwise:
+# backtracking
 Backtracking algorithm with some classical computer science problems.
 
 Current problem set:
